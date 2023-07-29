@@ -1,8 +1,5 @@
 resource "aws_s3_bucket" "bucket" {
     bucket = "anaeleboo-terraform-state-backend"
-    versioning {
-        enabled = true
-    }
     server_side_encryption_configuration {
         rule {
             apply_server_side_encryption_by_default {
@@ -16,4 +13,13 @@ resource "aws_s3_bucket" "bucket" {
     tags = {
         Name = "S3 Remote Terraform State Store"
     }
+}
+
+# Add version of the bucket
+
+resource "aws_s3_bucket_versioning" "versioning_example" {
+  bucket = aws_s3_bucket.bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
