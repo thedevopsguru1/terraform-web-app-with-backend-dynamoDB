@@ -35,7 +35,7 @@ resource "aws_s3_bucket_object_lock_configuration" "example" {
   rule {
     default_retention {
       mode = "COMPLIANCE"
-      days = 5
+      days = 5      # enable the deletion of the state file for 5 days
     }
   }
 }
